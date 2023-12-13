@@ -23,9 +23,35 @@ const { NotImplementedError } = require('../extensions/index.js');
  *  [1, 1, 1]
  * ]
  */
-function minesweeper(/* matrix */) {
-  throw new NotImplementedError('Not implemented');
-  // remove line with error and write your code here
+function minesweeper(matrix) {
+  let count = 0;
+  let result = [];
+  let resultILength = matrix.length;
+  let resultJlength = matrix[0].length;
+
+  for (let i = 0; i < resultILength; i++) {
+    result.push([]);
+    for (let j = 0; j < resultJlength; j++) {
+      if (matrix[i - 1]) {
+        if (matrix[i - 1][j - 1] && matrix[i - 1][j - 1] == true) count++
+        if (matrix[i - 1][j] && matrix[i - 1][j] == true) count++
+        if (matrix[i - 1][j + 1] && matrix[i - 1][j + 1] == true) count++
+      }
+
+      if (matrix[i][j - 1] && matrix[i][j - 1] == true) count++
+      if (matrix[i][j + 1] && matrix[i][j + 1] == true) count++
+
+      if (matrix[i + 1]) {
+        if (matrix[i + 1][j - 1] && matrix[i + 1][j - 1] == true) count++
+        if (matrix[i + 1][j] && matrix[i + 1][j] == true) count++
+        if (matrix[i + 1][j + 1] && matrix[i + 1][j + 1] == true) count++
+      }
+
+      result[i][j] = count;
+      count = 0;
+    }
+  }
+  return result
 }
 
 module.exports = {
